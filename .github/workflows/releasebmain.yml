@@ -1,0 +1,25 @@
+name: Trigger actions on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Trigger another action
+      uses: actions/github-script@v3
+      with:
+        script: |
+          const octokit = require("@octokit/rest")();
+          octokit.repos.createDispatchEvent({
+            owner: "${{ github.repository_owner }}",
+            repo: "github-actions",
+            event_type: "run-action",
+            client_payload: {
+              "action-name": "action-value"
+            }
+          });
