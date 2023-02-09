@@ -19,4 +19,4 @@ jobs:
     - name: Trigger another action
       run: |
         npm install @octokit/rest
-        node -e "const octokit = require('@octokit/rest')(); octokit.repos.createDispatchEvent({ owner: '${{ github.repository_owner }}', repo: 'github-actions', event_type: 'run-action', client_payload: { 'action-name': 'action-value' } });"
+        node -e "const octokit = require('@octokit/rest'); const client = octokit(); client.repos.createDispatchEvent({ owner: '${{ github.repository_owner }}', repo: 'github-actions', event_type: 'run-action', client_payload: { 'action-name': 'action-value' } });"
