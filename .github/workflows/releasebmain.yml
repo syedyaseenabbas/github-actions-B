@@ -10,16 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm ci
+
     - name: Trigger another action
-      uses: actions/github-script@v3
-      with:
-        script: |
-          const octokit = require("@octokit/rest")();
-          octokit.repos.createDispatchEvent({
-            owner: "${{ github.repository_owner }}",
-            repo: "github-actions",
-            event_type: "run-action",
-            client_payload: {
-              "action-name": "action-value"
-            }
-          });
+      run: |
+        npm install @octokit/rest
+        node -e "const octokit = require('@octokit/rest')(); octokit.repos.createDispatchEvent({ owner: '${{ github.repository_owner }}', repo: 'github-actions', event_type: 'run-action', client_payload: { 'action-name': 'action-value' } });"
