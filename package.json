@@ -1,0 +1,19 @@
+{
+  "name": "github-actions-b",
+  "version": "1.0.0",
+  "description": "test package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syedyaseenabbas/github-actions-B.git"
+  },
+  "author": "syed yaseen abbas rizvi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/syedyaseenabbas/github-actions-B/issues"
+  },
+  "homepage": "https://github.com/syedyaseenabbas/github-actions-B#readme"
+}
