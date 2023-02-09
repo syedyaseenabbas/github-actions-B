@@ -1,4 +1,4 @@
-name: Trigger actions on push
+name: Trigger B on push
 
 on:
   push:
@@ -7,16 +7,18 @@ on:
 
 jobs:
   build:
+    name: Dispatch to 'dank-style-website'
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Trigger another action
-      run: |
-        npm install @octokit/rest
-        node -e "const { Octokit } = require('@octokit/rest'); const octokit = new Octokit(); octokit.repos.createDispatchEvent({ owner: '${{ github.repository_owner }}', repo: 'github-actions', event_type: 'run-action' });"
+      - name: Emit repository_dispatch
+        uses: mvasigh/dispatch-action@main
+        with:
+          # You should create a personal access token and store it in your repository
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
+          repo: github-actions
+          owner: syedyaseenabbas
+          event_type: dispatch
+          message: |
+            {
+              "repo": "It from A" 
+            }
